@@ -1,0 +1,28 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+  <!-- namespace:该mapper.xml映射文件的唯一标识 -->
+<mapper namespace="org.lianxi.mapper.AccessMapper">
+       
+    <select id="allAccesss" resultType="access">
+       select * from access
+    </select> 
+     
+    <insert id="addAccess" parameterType="access">
+       insert into access (name,url) values(#{name},#{url})
+    </insert>
+     
+    <delete id="deleteAccess" parameterType="int">
+       delete from access where id =#{id}
+    </delete>
+    
+    <select id="queryaccess" resultType="access" parameterType="int">
+       select * from access where id=#{id}
+    </select>
+    
+    <select id="qureyIdByname" parameterType="String" resultType="int">
+       select id from access where name=#{name}
+    </select>
+</mapper> 

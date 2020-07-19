@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+  <!-- namespace:该mapper.xml映射文件的唯一标识 -->
+<mapper namespace="org.lianxi.mapper.TaskMapper">
+      
+     <insert id="addTask" parameterType="task">
+        insert into task (userid,name,task) values(#{userid},#{name},#{task})
+     </insert>
+      
+     <select id="myTasks" parameterType="String" resultType="task">
+        select * from task where userid=#{userid}
+     </select>
+     
+     <delete id="deleteTask" parameterType="int">
+        delete from task where id=#{id}
+     </delete>
+      
+</mapper> 

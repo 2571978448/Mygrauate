@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xmlns:context="http://www.springframework.org/schema/context"
+	xmlns:p="http://www.springframework.org/schema/p"
+	xmlns:mvc="http://www.springframework.org/schema/mvc"
+	xsi:schemaLocation="http://www.springframework.org/schema/mvc http://www.springframework.org/schema/mvc/spring-mvc-4.3.xsd
+		http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+		http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context-4.3.xsd">
+   
+    <!-- 数据源、mapper.xml -->
+    
+    <!-- 配置数据库信息（替代mybatis的配置文件） -->
+    <!-- 配置数据库相关 -->
+    <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource">
+         <property name="driverClassName" value="com.mysql.jdbc.Driver"></property>
+	     <property name="url" value="jdbc:mysql://localhost:3306/graduate?serverTimezone=UTC&amp;useSSL=false&amp;characterEncoding=UTF-8"></property>
+	     <property name="username" value="root"></property>
+	     <property name="password" value="321000"></property>
+    </bean>
+    
+    <!-- controller --> 
+    <!-- <bean id="studentController" class="org.lianxi.controller.StudentController">
+        <property name="studentService" ref="studentService"></property>
+    </bean> -->
+    
+    <!-- 在SpringIOC容器中创建Mybatis的核心类SqlSessionFactory -->
+    <bean id="SqlsessionFactory" class="org.mybatis.spring.SqlSessionFactoryBean" p:typeAliasesPackage="org.lianxi.entity">
+       <property name="dataSource" ref="dataSource"></property>   <!-- 里面有一个          数据源属性 -->
+       <!--<property name="configLocation" value="classpath:conf.xml"></property>        属性    ：   加载mybatis配置文件 conf.xml-->
+       <property name="mapperLocations" value="classpath:org/lianxi/mapper/*.xml"></property>                        <!-- 属性：        加载mapper.xml配置路径 -->
+    </bean>
+    
+    <!-- 将MyBatis的SqlSessionFactory交给Spring -->
+    <bean id="mappers" class="org.mybatis.spring.mapper.MapperScannerConfigurer">
+        <property name="basePackage" value="org.lianxi.mapper"></property>                                      <!-- 指定批量产生哪个包的mapper对象 -->
+        <property name="sqlSessionFactoryBeanName" value="SqlsessionFactory"></property>   <!-- 第三种方式用sqlSessionFactoryBeanName -->      <!-- 告诉数据源以及配置文件mapper.xml -->
+    </bean>
+    <!-- 上面basePackage所在property的作用：将该包中所有接口产生与之动态代理的对象（对象名就是首之母小写的接口名） -->
+    
+    <mvc:annotation-driven></mvc:annotation-driven>
+    
+    
+    
+</beans>

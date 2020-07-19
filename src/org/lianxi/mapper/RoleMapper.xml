@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+  <!-- namespace:该mapper.xml映射文件的唯一标识 -->
+<mapper namespace="org.lianxi.mapper.RoleMapper">
+    
+    <select id="queryAllRoles" resultType="role">
+        select * from role
+    </select>
+    
+    <select id="queryRoleById" parameterType="int" resultType="role">
+        select * from role where id=#{id}
+    </select>
+    
+    <insert id="addRole" parameterType="role">
+        insert into role (id,name) values(#{id},#{name})
+    </insert>
+
+    <delete id="deleteDoleById" parameterType="int">
+        delete from role where id=#{id}
+    </delete>
+    
+    
+    
+</mapper> 

@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- namespace:该mapper.xml映射文件的唯一标识 -->
+<mapper namespace="org.lianxi.mapper.Role_accessMapper">
+    
+    <select id="queryR_aByRoleid" parameterType="int" resultType="role_access">
+        select * from role_access where roleid=#{roleid}
+    </select>
+    
+    <insert id="addRole_access" parameterType="role_access">
+        insert into role_access (roleid,accessid) value(#{roleid},#{accessid})
+    </insert>
+    
+    <select id="queryRole_access" parameterType="role_access" resultType="int">
+        select count(*) from role_access where roleid=#{roleid} and accessid=#{accessid}
+    </select>
+    
+    <delete id="deleteRole_aceess" parameterType="role_access">
+        delete from role_access where roleid=#{roleid} and accessid=#{accessid}
+    </delete>
+    
+</mapper>

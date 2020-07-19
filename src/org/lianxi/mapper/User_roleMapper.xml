@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- namespace:该mapper.xml映射文件的唯一标识 -->
+<mapper namespace="org.lianxi.mapper.User_roleMapper">
+    
+    <insert id="addUser_role" parameterType="user_role">
+       insert into user_role (userid,roleid) value(#{userid},#{roleid})
+    </insert>
+    
+    <select id="queryUser_role" parameterType="user_role" resultType="int">
+       select count(*) from user_role where userid=#{userid}
+    </select>
+    
+    <select id="queryRidByUid" parameterType="String" resultType="int">
+       select roleid from user_role where userid=#{userid}
+    </select>
+    
+    <update id="updateUser_role" parameterType="user_role">
+       update user_role set roleid=#{roleid} where userid=#{userid}
+    </update>
+    
+</mapper> 

@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper
+ PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+ "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+ 
+ <!-- namespace:该mapper.xml映射文件的唯一标识 -->
+<mapper namespace="org.lianxi.mapper.UserMapper">
+    
+    <insert id="addUser" parameterType="user">
+         insert into user(id,password,name,age,phonenumber,email,address) values(#{id},#{password},#{name},#{age},#{phonenumber},#{email},#{address})
+    </insert>
+    
+    <select id="queryAllUsers" resultType="user">
+         select * from user
+    </select>
+    
+    <select id="queryUserByName" parameterType="String" resultType="user">
+         select * from user where name=#{name}
+    </select>
+    
+    <select id="queryUserById" parameterType="String" resultType="user">
+         select * from user where id=#{id}
+    </select>
+    
+    <select id="queryUserById1" parameterType="String" resultType="user">
+         select * from user where id=#{id}
+    </select>
+    
+    <delete id="deleteUser" parameterType="String">
+         delete from user where id=#{id}
+    </delete>
+    
+    <select id="queryUser" parameterType="user" resultType="int">
+         select count(*) from user where id=#{id} and password=#{password}
+    </select>
+    
+    <!-- <select id="queryStudentBystuNo" parameterType="int" resultType="org.lianxi.entity.Student">
+         select * from student where stuno =#{stuNo}
+    </select>
+    
+    <insert id="addStudent" parameterType="org.lianxi.entity.Student">
+         insert into student(stuno,stuname,stuage) values(#{stuNo},#{stuName},#{stuAge})
+    </insert> -->
+    
+</mapper> 
